@@ -3,7 +3,7 @@
     <div class="logo"></div>
     <div class="search">
       <input [(ngModel)]="search" name="search" type="text" class="search-input">
-      <button (click)="onSubmit()" type="button" class="submit-button">Search</button>
+      <button [disabled]="!search" (click)="onSubmit()" type="button" class="submit-button">Search</button>
     </div>
   </div>
 </section>
