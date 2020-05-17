@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchPagesComponent } from './pages/search-pages/search-pages.component';
 import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
-import { AnswersPageComponent } from './pages/answers-page/answers-page.component';
+import { QuestionPageComponent } from './pages/question-page/question-page.component';
 import { ComponentsModule } from './components/components.module';
 import { StackoverflowService } from './services/search/stackoverflow.service';
 
@@ -15,7 +15,7 @@ const COMPONENTS = [
   AppComponent,
   SearchPagesComponent,
   QuestionsPageComponent,
-  AnswersPageComponent,
+  QuestionPageComponent,
 ];
 
 @NgModule({

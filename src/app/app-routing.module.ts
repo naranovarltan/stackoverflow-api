@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchPagesComponent } from './pages/search-pages/search-pages.component';
 import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
-import { AnswersPageComponent } from './pages/answers-page/answers-page.component';
+import { QuestionPageComponent } from './pages/question-page/question-page.component';
 import { PathConfig } from './config/path.config';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: `${PathConfig.QUESTIONS}/:question_id`,
-    component: AnswersPageComponent,
+    component: QuestionPageComponent,
   }
 ];
 

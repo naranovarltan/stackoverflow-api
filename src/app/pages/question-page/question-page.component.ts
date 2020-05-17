@@ -6,11 +6,11 @@ import { StackoverflowService } from '../../services/search/stackoverflow.servic
 import { AnswerInterface } from '../../interfaces/answer.interface';
 
 @Component({
-  selector: 'app-answers-page',
-  templateUrl: './answers-page.component.html',
-  styleUrls: ['./answers-page.component.less']
+  selector: 'app-question-page',
+  templateUrl: './question-page.component.html',
+  styleUrls: ['./question-page.component.less']
 })
-export class AnswersPageComponent implements OnInit {
+export class QuestionPageComponent implements OnInit {
 
   public answers$: Observable<AnswerInterface[]>;
   public isAnswersLoading$ = new BehaviorSubject<boolean>(true);
