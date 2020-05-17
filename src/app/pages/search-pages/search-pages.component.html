@@ -1,3 +1,9 @@
-<p>
-  search-pages works!
-</p>
+<section class="search-page">
+  <div class="search-page-container">
+    <div class="logo"></div>
+    <div class="search">
+      <input [(ngModel)]="search" name="search" type="text" class="search-input">
+      <button (click)="onSubmit()" type="button" class="submit-button">Search</button>
+    </div>
+  </div>
+</section>

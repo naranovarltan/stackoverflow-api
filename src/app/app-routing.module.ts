@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchPagesComponent } from './pages/search-pages/search-pages.component';
-import { ResultsSearchPageComponent } from './pages/results-search-page/results-search-page.component';
-import { AnswerPageComponent } from './pages/answer-page/answer-page.component';
+import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
+import { AnswersPageComponent } from './pages/answers-page/answers-page.component';
 import { PathConfig } from './config/path.config';
 
 const routes: Routes = [
@@ -17,11 +17,11 @@ const routes: Routes = [
   },
   {
     path: PathConfig.RESULTS_SEARCH,
-    component: ResultsSearchPageComponent,
+    component: QuestionsPageComponent,
   },
   {
-    path: PathConfig.ANSWERS,
-    component: AnswerPageComponent,
+    path: `${PathConfig.ANSWERS}/:question_id`,
+    component: AnswersPageComponent,
   }
 ];
 

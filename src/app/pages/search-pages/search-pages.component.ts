@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { PathConfig } from '../../config/path.config';
 
 @Component({
   selector: 'app-search-pages',
   templateUrl: './search-pages.component.html',
   styleUrls: ['./search-pages.component.less']
 })
-export class SearchPagesComponent implements OnInit {
+export class SearchPagesComponent {
 
-  constructor() {
+  public search: string;
+
+  constructor(private router: Router) {}
+
+  public onSubmit(): void {
+    this.router.navigate([PathConfig.RESULTS_SEARCH], { queryParams: { search: this.search } });
   }
-
-  ngOnInit() {
-  }
-
 }

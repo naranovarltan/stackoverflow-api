@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.author, .tags {
+  flex: 1;
+}
+
+.theme {
+  flex: 2;
+}
+
+.count {
+  flex: 0.5;
+}
+
+.theme, .count, .tags {
+  padding-left: 16px;
+}
+
+.tags {
+  display: flex;
+
+  .tag {
+    margin-right: 8px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

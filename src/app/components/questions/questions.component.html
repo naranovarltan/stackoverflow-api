@@ -1,0 +1,13 @@
+<div class="titles">
+  <div class="author">автор</div>
+  <div class="theme">тема</div>
+  <div class="count">ответов</div>
+  <div class="tags">теги</div>
+</div>
+<app-question
+  *ngFor="let question of questions"
+  [question]="question"
+  (navigateTo)="navigateTo.emit($event)"
+  (openPanelByUser)="openPanelByUser.emit($event)"
+  (openPanelByTag)="openPanelByTag.emit($event)">
+</app-question>
