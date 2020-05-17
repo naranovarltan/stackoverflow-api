@@ -9,7 +9,7 @@ import { SearchPagesComponent } from './pages/search-pages/search-pages.componen
 import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
 import { AnswersPageComponent } from './pages/answers-page/answers-page.component';
 import { ComponentsModule } from './components/components.module';
-import { SearchService } from './services/search/search.service';
+import { StackoverflowService } from './services/search/stackoverflow.service';
 
 const COMPONENTS = [
   AppComponent,
@@ -27,7 +27,7 @@ const COMPONENTS = [
     FormsModule,
     HttpClientModule,
   ],
-  providers: [SearchService],
+  providers: [StackoverflowService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

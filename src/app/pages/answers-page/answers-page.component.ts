@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
-import { SearchService } from '../../services/search/search.service';
+import { StackoverflowService } from '../../services/search/stackoverflow.service';
 import { AnswerInterface } from '../../interfaces/answer.interface';
 
 @Component({
@@ -14,13 +14,13 @@ export class AnswersPageComponent implements OnInit {
 
   public answers$: Observable<AnswerInterface[]>;
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService) {}
+  constructor(private route: ActivatedRoute, private stackoverflowService: StackoverflowService) {}
 
   ngOnInit() {
     this.answers$ = this.route.params
       .pipe(
         map(({ question_id }: Params) => question_id),
-        switchMap((question_id: string) => this.searchService.getAnswersByIds$(question_id)),
+        switchMap((question_id: string) => this.stackoverflowService.getAnswersByIds$(question_id)),
       );
   }
 }

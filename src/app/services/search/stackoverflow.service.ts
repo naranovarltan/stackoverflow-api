@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { SearchResponseInterface } from '../../interfaces/search-response.interface';
-import { AnswersResponseInterface } from '../../interfaces/answers-response.interface';
+import { HttpResponseInterface } from '../../interfaces/http-response.interface';
 import { map } from 'rxjs/operators';
 import { QuestionInterface } from '../../interfaces/question.interface';
 import { AnswerInterface } from '../../interfaces/answer.interface';
 
 @Injectable()
-export class SearchService {
+export class StackoverflowService {
 
   constructor(private http: HttpClient) {
   }
@@ -23,7 +22,6 @@ export class SearchService {
       sort: 'activity',
       tagged: searchValue,
       intitle: searchValue,
-      filter: 'withbody',
       site: 'stackoverflow',
     };
 
@@ -106,7 +104,7 @@ export class SearchService {
         }
       ]
     }).pipe(
-      map(({ items }: SearchResponseInterface) => items),
+      map(({ items }: HttpResponseInterface<QuestionInterface>) => items),
     );
 
     // return this.http.get(`${this.api}/search`, {params});
@@ -139,9 +137,23 @@ export class SearchService {
         score: 1,
       }]
     }).pipe(
-      map(({ items }: AnswersResponseInterface) => items)
+      map(({ items }: HttpResponseInterface<AnswerInterface>) => items)
     );
 
     // return this.http.get(`${this.api}/questions/${questionId}/answers`, { params });
+  }
+
+  public getUserPosts$(userId: number): Observable<any> {
+    const params: any = {
+      page: '1',
+      pagesize: '10',
+      order: 'desc',
+      sort: 'activity',
+      tagged: 'javascript',
+      intitle: 'javascript',
+      site: 'stackoverflow',
+    };
+
+    return this.http.get(`${this.api}/users/${userId}/posts`, { params });
   }
 }

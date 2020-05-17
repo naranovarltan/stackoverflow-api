@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { SearchService } from '../../services/search/search.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { StackoverflowService } from '../../services/search/stackoverflow.service';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { PathConfig } from '../../config/path.config';
 import { QuestionInterface } from '../../interfaces/question.interface';
@@ -14,12 +14,12 @@ import { QuestionInterface } from '../../interfaces/question.interface';
 export class QuestionsPageComponent implements OnInit {
 
   public questions$: Observable<QuestionInterface[]>;
-  public panelOpened$: Observable<boolean>;
+  public panelOpened$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly searchService: SearchService,
+    private readonly stackoverflowService: StackoverflowService,
   ) { }
 
   ngOnInit(): void {
@@ -31,11 +31,11 @@ export class QuestionsPageComponent implements OnInit {
   }
 
   public openPanelByUser(userId: number): void {
-
+    this.panelOpened$.next(true);
   }
 
   public openPanelByTag(tag: string): void {
-
+    this.panelOpened$.next(true);
   }
 
   private initSearch(): void {
@@ -43,7 +43,7 @@ export class QuestionsPageComponent implements OnInit {
       .pipe(
         map(({ search }: Params) => search),
         filter((search: string) => !!search),
-        switchMap((search: string) => this.searchService.search$(search)),
+        switchMap((search: string) => this.stackoverflowService.search$(search)),
       );
   }
 }
