@@ -1,7 +1,7 @@
 <app-questions
   [questions]="questions$ | async"
-  (openPanelByUser)="openPanelByUser($event)"
-  (openPanelByTag)="openPanelByTag($event)"
+  (openPanelByUser)="openPanelByUser($event, 'user')"
+  (openPanelByTag)="openPanelByTag($event, 'tag')"
   (navigateTo)="navigateToAnswers($event)">
 </app-questions>
 
@@ -9,8 +9,8 @@
   <app-quick-panel
     [questions]="panelQuestions$ | async"
     [info]="quickPanelParams?.info"
-    (openPanelByUser)="openPanelByUser($event)"
-    (openPanelByTag)="openPanelByTag($event)"
+    (openPanelByUser)="openPanelByUser($event, 'user')"
+    (openPanelByTag)="openPanelByTag($event, 'tag')"
     (navigateTo)="navigateToAnswers($event)">
   </app-quick-panel>
 </ng-container>

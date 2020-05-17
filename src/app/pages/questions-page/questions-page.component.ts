@@ -8,6 +8,7 @@ import { QuestionInterface } from '../../interfaces/question.interface';
 import { UserPostInterface } from '../../interfaces/user-post.interface';
 import { QuickPanelParamsInterface } from '../../interfaces/quick-panel-params.interface';
 import { OwnerInterface } from '../../interfaces/owner.interface';
+import { QuickPanelType } from '../../types/quick-panel.type';
 
 @Component({
   selector: 'app-questions-page',
@@ -34,12 +35,12 @@ export class QuestionsPageComponent implements OnInit {
     this.router.navigate([`${PathConfig.ANSWERS}/${id}`]);
   }
 
-  public openPanelByUser({ user_id, display_name }: OwnerInterface): void {
-    this.quickPanelParams$.next({ type: 'user', userId: user_id, info: `пользователю ${display_name}` });
+  public openPanelByUser({ user_id, display_name }: OwnerInterface, type: QuickPanelType): void {
+    this.quickPanelParams$.next({ type, userId: user_id, info: `пользователю ${display_name}` });
   }
 
-  public openPanelByTag(tag: string): void {
-    this.quickPanelParams$.next({ type: 'tag', tag, info: `тегу ${tag}` });
+  public openPanelByTag(tag: string, type: QuickPanelType): void {
+    this.quickPanelParams$.next({ type, tag, info: `тегу ${tag}` });
   }
 
   private initObservables(): void {
