@@ -5,6 +5,7 @@
 <div class="panel-questions">
   <app-questions
     [questions]="questions"
+    [loading]="loading"
     (navigateTo)="navigateTo.emit($event)"
     (openPanelByUser)="openPanelByUser.emit($event)"
     (openPanelByTag)="openPanelByTag.emit($event)">

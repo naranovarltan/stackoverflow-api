@@ -16,11 +16,11 @@ const routes: Routes = [
     component: SearchPagesComponent,
   },
   {
-    path: PathConfig.RESULTS_SEARCH,
+    path: PathConfig.QUESTIONS,
     component: QuestionsPageComponent,
   },
   {
-    path: `${PathConfig.ANSWERS}/:question_id`,
+    path: `${PathConfig.QUESTIONS}/:question_id`,
     component: AnswersPageComponent,
   }
 ];

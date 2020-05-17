@@ -15,6 +15,6 @@ export class SearchPagesComponent {
   constructor(private router: Router) {}
 
   public onSubmit(): void {
-    this.router.navigate([PathConfig.RESULTS_SEARCH], { queryParams: { search: this.search } });
+    this.router.navigate([PathConfig.QUESTIONS], { queryParams: { search: this.search } });
   }
 }

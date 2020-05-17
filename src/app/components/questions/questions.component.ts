@@ -9,6 +9,7 @@ import { OwnerInterface } from '../../interfaces/owner.interface';
 })
 export class QuestionsComponent {
   @Input() questions: QuestionInterface[];
+  @Input() loading = false;
 
   @Output() navigateTo = new EventEmitter<number>();
   @Output() openPanelByUser = new EventEmitter<OwnerInterface>();

@@ -1,3 +1,13 @@
-<div *ngFor="let item of answers">
-  <div [innerHtml]="item.body"></div>
-</div>
+<ng-container *ngIf="loading; else answersList">
+  <div class="text-center">Загрузка ответов на вопрос</div>
+</ng-container>
+
+<ng-template #answersList>
+  <ng-container *ngIf="answers && answers.length; else emptyAnswers">
+    <div *ngFor="let item of answers" [innerHtml]="item.body" class="post-text"></div>
+  </ng-container>
+</ng-template>
+
+<ng-template #emptyAnswers>
+  <div class="text-center">На этот вопрос пока нет ответов</div>
+</ng-template>

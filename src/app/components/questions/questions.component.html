@@ -4,10 +4,23 @@
   <div class="count">ответов</div>
   <div class="tags">теги</div>
 </div>
-<app-question
-  *ngFor="let question of questions"
-  [question]="question"
-  (navigateTo)="navigateTo.emit($event)"
-  (openPanelByUser)="openPanelByUser.emit($event)"
-  (openPanelByTag)="openPanelByTag.emit($event)">
-</app-question>
+
+<ng-container *ngIf="loading; else questionsList">
+  <div class="text-center">Загрузка вопросов</div>
+</ng-container>
+
+<ng-template #questionsList>
+  <ng-container *ngIf="questions && questions.length; else emptyQuestions">
+    <app-question
+      *ngFor="let question of questions"
+      [question]="question"
+      (navigateTo)="navigateTo.emit($event)"
+      (openPanelByUser)="openPanelByUser.emit($event)"
+      (openPanelByTag)="openPanelByTag.emit($event)">
+    </app-question>
+  </ng-container>
+</ng-template>
+
+<ng-template #emptyQuestions>
+  <div class="text-center">Список пуск</div>
+</ng-template>

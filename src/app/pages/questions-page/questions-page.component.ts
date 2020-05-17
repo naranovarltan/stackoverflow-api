@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StackoverflowService } from '../../services/search/stackoverflow.service';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { PathConfig } from '../../config/path.config';
 import { QuestionInterface } from '../../interfaces/question.interface';
 import { UserPostInterface } from '../../interfaces/user-post.interface';
@@ -20,6 +20,8 @@ export class QuestionsPageComponent implements OnInit {
   public questions$: Observable<QuestionInterface[]>;
   public panelQuestions$: Observable<QuestionInterface[]>;
   public quickPanelParams$ = new BehaviorSubject<QuickPanelParamsInterface | null>(null);
+  public isQuestionsLoading$ = new BehaviorSubject<boolean>(true);
+  public isPanelQuestionsLoading$ = new BehaviorSubject<boolean>(true);
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -32,7 +34,7 @@ export class QuestionsPageComponent implements OnInit {
   }
 
   public navigateToAnswers(id: number): void {
-    this.router.navigate([`${PathConfig.ANSWERS}/${id}`]);
+    this.router.navigate([`${PathConfig.QUESTIONS}/${id}`]);
   }
 
   public openPanelByUser({ user_id, display_name }: OwnerInterface, type: QuickPanelType): void {
@@ -48,15 +50,19 @@ export class QuestionsPageComponent implements OnInit {
       .pipe(
         map(({ search }: Params) => search),
         filter((search: string) => !!search),
+        tap(() => this.isQuestionsLoading$.next(true)),
         switchMap((search: string) => this.stackoverflowService.search$(search)),
+        tap(() => this.isQuestionsLoading$.next(false)),
       );
 
     this.panelQuestions$ = this.quickPanelParams$
       .pipe(
         filter((panelParams: QuickPanelParamsInterface | null) => !!panelParams),
+        tap(() => this.isPanelQuestionsLoading$.next(true)),
         switchMap(({ type, userId, tag }: QuickPanelParamsInterface) =>
           type === 'user' ? this.getQuestionsByUserId$(userId) : this.getQuestionByTag$(tag),
         ),
+        tap(() => this.isPanelQuestionsLoading$.next(false)),
       );
   }
 

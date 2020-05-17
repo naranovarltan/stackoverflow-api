@@ -8,4 +8,5 @@ import { AnswerInterface } from '../../interfaces/answer.interface';
 })
 export class AnswersComponent {
   @Input() answers: AnswerInterface[];
+  @Input() loading = true;
 }

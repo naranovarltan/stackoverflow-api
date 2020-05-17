@@ -10,6 +10,7 @@ import { OwnerInterface } from '../../interfaces/owner.interface';
 export class QuickPanelComponent {
   @Input() questions: QuestionInterface[];
   @Input() info: string;
+  @Input() loading = false;
 
   @Output() navigateTo = new EventEmitter<number>();
   @Output() openPanelByUser = new EventEmitter<OwnerInterface>();
