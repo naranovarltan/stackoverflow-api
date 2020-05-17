@@ -1,3 +1,7 @@
+<div *ngIf="title$ | async as title" class="title text-center">
+  <button (click)="navigateToSearch()" class="back-btn">Вернуться к поиску</button>
+  <span class="text">Результаты поиска по поиску: {{ title }}</span>
+</div>
 <ng-container *ngIf="quickPanelParams$ | async as quickPanelParams">
   <app-quick-panel
     [questions]="panelQuestions$ | async"

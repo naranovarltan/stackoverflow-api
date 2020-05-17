@@ -1,2 +1,5 @@
-<app-navigation-menu></app-navigation-menu>
+<div class="title">
+  <button (click)="navigateToPrevPage()" class="back-btn">Вернуться к списку</button>
+  <app-question [question]="question$ | async" class="question"></app-question>
+</div>
 <app-answers [answers]="answers$ | async" [loading]="isAnswersLoading$ | async"></app-answers>

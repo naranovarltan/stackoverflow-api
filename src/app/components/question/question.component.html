@@ -1,14 +1,16 @@
-<div (click)="openPanelByUser.emit(question.owner)" class="author">
-  {{ question.owner.display_name }}
-</div>
-<div (click)="navigateTo.emit(question.question_id)" class="theme">
-  {{ question.title }}
-</div>
-<div (click)="navigateTo.emit(question.question_id)" class="count">
-  {{ question.answer_count }}
-</div>
-<div class="tags">
-  <div *ngFor="let tag of question.tags" (click)="openPanelByTag.emit(tag)" class="tag">
-    {{ tag }}
+<ng-container *ngIf="!!question">
+  <div (click)="openPanelByUser.emit(question.owner)" class="author">
+    {{ question.owner.display_name }}
   </div>
-</div>
+  <div (click)="navigateTo.emit(question.question_id)" class="theme">
+    {{ question.title }}
+  </div>
+  <div (click)="navigateTo.emit(question.question_id)" class="count">
+    {{ question.answer_count }}
+  </div>
+  <div class="tags">
+    <div *ngFor="let tag of question.tags" (click)="openPanelByTag.emit(tag)" class="tag">
+      {{ tag }}
+    </div>
+  </div>
+</ng-container>

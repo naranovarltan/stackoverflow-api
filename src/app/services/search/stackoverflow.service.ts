@@ -15,7 +15,7 @@ export class StackoverflowService {
 
   private api = 'https://api.stackexchange.com/2.2';
 
-  public search$(intitle: string): Observable<QuestionInterface[]> {
+  public getQuestionsByTitle$(intitle: string): Observable<QuestionInterface[]> {
     const params: Record<string, string | string[]> = { ...DEFAULT_QUERY_PARAMS, intitle, sort: 'votes' };
 
     return this.http.get<HttpResponseInterface<QuestionInterface>>(`${this.api}/search`, { params })
@@ -42,7 +42,7 @@ export class StackoverflowService {
       );
   }
 
-  public getQuestionsByIds$(questionIds: number[]): Observable<QuestionInterface[]> {
+  public getQuestionsByIdOrIds$(questionIds: string[]): Observable<QuestionInterface[]> {
     const params: Record<string, string | string[]> = { ...DEFAULT_QUERY_PARAMS, sort: 'votes' };
     const ids = questionIds.join(QUERY_IDS_SEPARATOR);
 
