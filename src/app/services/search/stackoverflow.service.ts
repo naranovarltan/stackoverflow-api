@@ -5,6 +5,7 @@ import { HttpResponseInterface } from '../../interfaces/http-response.interface'
 import { map } from 'rxjs/operators';
 import { QuestionInterface } from '../../interfaces/question.interface';
 import { AnswerInterface } from '../../interfaces/answer.interface';
+import { UserPostInterface } from '../../interfaces/user-post.interface';
 
 @Injectable()
 export class StackoverflowService {
@@ -107,7 +108,7 @@ export class StackoverflowService {
       map(({ items }: HttpResponseInterface<QuestionInterface>) => items),
     );
 
-    // return this.http.get(`${this.api}/search`, {params});
+    // return this.http.get<HttpResponseInterface<QuestionInterface>>(`${this.api}/search`, {params});
   }
 
   public getAnswersByIds$(questionId: string): Observable<AnswerInterface[]> {
@@ -140,10 +141,10 @@ export class StackoverflowService {
       map(({ items }: HttpResponseInterface<AnswerInterface>) => items)
     );
 
-    // return this.http.get(`${this.api}/questions/${questionId}/answers`, { params });
+    // return this.http.get<HttpResponseInterface<AnswerInterface>>(`${this.api}/questions/${questionId}/answers`, { params });
   }
 
-  public getUserPosts$(userId: number): Observable<any> {
+  public getUserPosts$(userId: number): Observable<UserPostInterface[]> {
     const params: any = {
       page: '1',
       pagesize: '10',
@@ -154,6 +155,204 @@ export class StackoverflowService {
       site: 'stackoverflow',
     };
 
-    return this.http.get(`${this.api}/users/${userId}/posts`, { params });
+    return this.http.get<HttpResponseInterface<UserPostInterface>>(`${this.api}/users/${userId}/posts`, { params })
+      .pipe(
+        map(({ items }: HttpResponseInterface<UserPostInterface>) => items),
+      );
+  }
+
+  public getQuestionsByIds$(ids: number[]): Observable<QuestionInterface[]> {
+    const params: any = {
+      page: '1',
+      pagesize: '10',
+      order: 'desc',
+      sort: 'activity',
+      site: 'stackoverflow',
+    };
+
+    return of({
+      quota_max: 300,
+      quota_remaining: 262,
+      has_more: true,
+      items: [
+        {
+          accepted_answer_id: 61848194,
+          answer_count: 2,
+          content_license: 'CC BY-SA 4.0',
+          creation_date: 1589699010,
+          is_answered: true,
+          last_activity_date: 1589709794,
+          last_edit_date: 1589702646,
+          link: 'https://stackoverflow.com/questions/61848128/onclick-using-javascript',
+          owner: {
+            accept_rate: 100,
+            display_name: 'Brad',
+            link: 'https://stackoverflow.com/users/4383153/brad',
+            profile_image: 'https://graph.facebook.com/796150084/picture?type=large',
+            reputation: 31,
+            user_id: 4383153,
+            user_type: 'registered',
+          },
+          question_id: 61848128,
+          score: 0,
+          tags: ['javascript', 'jquery', 'ajax'],
+          title: 'Onclick using Javascript',
+          view_count: 43,
+        },
+        {
+          accepted_answer_id: 61848194,
+          answer_count: 2,
+          content_license: 'CC BY-SA 4.0',
+          creation_date: 1589699010,
+          is_answered: true,
+          last_activity_date: 1589709794,
+          last_edit_date: 1589702646,
+          link: 'https://stackoverflow.com/questions/61848128/onclick-using-javascript',
+          owner: {
+            accept_rate: 100,
+            display_name: 'Brad',
+            link: 'https://stackoverflow.com/users/4383153/brad',
+            profile_image: 'https://graph.facebook.com/796150084/picture?type=large',
+            reputation: 31,
+            user_id: 4383153,
+            user_type: 'registered',
+          },
+          question_id: 61848128,
+          score: 0,
+          tags: ['javascript', 'jquery', 'ajax'],
+          title: 'Onclick using Javascript',
+          view_count: 43,
+        },
+        {
+          accepted_answer_id: 61848194,
+          answer_count: 2,
+          content_license: 'CC BY-SA 4.0',
+          creation_date: 1589699010,
+          is_answered: true,
+          last_activity_date: 1589709794,
+          last_edit_date: 1589702646,
+          link: 'https://stackoverflow.com/questions/61848128/onclick-using-javascript',
+          owner: {
+            accept_rate: 100,
+            display_name: 'Brad',
+            link: 'https://stackoverflow.com/users/4383153/brad',
+            profile_image: 'https://graph.facebook.com/796150084/picture?type=large',
+            reputation: 31,
+            user_id: 4383153,
+            user_type: 'registered',
+          },
+          question_id: 61848128,
+          score: 0,
+          tags: ['javascript', 'jquery', 'ajax'],
+          title: 'Onclick using Javascript',
+          view_count: 43,
+        }
+      ]
+    }).pipe(
+      map(({ items }: HttpResponseInterface<QuestionInterface>) => items),
+    );
+
+    // return this.http.get<HttpResponseInterface<QuestionInterface>>(`${this.api}/questions/${ids.join(';')}`, { params })
+    //   .pipe(
+    //     map(({ items }: HttpResponseInterface<QuestionInterface>) => items),
+    //   );
+  }
+
+  public getQuestionsByTag$(tag: string): Observable<QuestionInterface[]> {
+    const params: any = {
+      page: '1',
+      pagesize: '10',
+      order: 'desc',
+      sort: 'activity',
+      tagged: tag,
+      site: 'stackoverflow',
+    };
+
+    return of({
+      quota_max: 300,
+      quota_remaining: 262,
+      has_more: true,
+      items: [
+        {
+          accepted_answer_id: 61848194,
+          answer_count: 2,
+          content_license: 'CC BY-SA 4.0',
+          creation_date: 1589699010,
+          is_answered: true,
+          last_activity_date: 1589709794,
+          last_edit_date: 1589702646,
+          link: 'https://stackoverflow.com/questions/61848128/onclick-using-javascript',
+          owner: {
+            accept_rate: 100,
+            display_name: 'Brad',
+            link: 'https://stackoverflow.com/users/4383153/brad',
+            profile_image: 'https://graph.facebook.com/796150084/picture?type=large',
+            reputation: 31,
+            user_id: 4383153,
+            user_type: 'registered',
+          },
+          question_id: 61848128,
+          score: 0,
+          tags: ['javascript', 'jquery', 'ajax'],
+          title: 'Onclick using Javascript',
+          view_count: 43,
+        },
+        {
+          accepted_answer_id: 61848194,
+          answer_count: 2,
+          content_license: 'CC BY-SA 4.0',
+          creation_date: 1589699010,
+          is_answered: true,
+          last_activity_date: 1589709794,
+          last_edit_date: 1589702646,
+          link: 'https://stackoverflow.com/questions/61848128/onclick-using-javascript',
+          owner: {
+            accept_rate: 100,
+            display_name: 'Brad',
+            link: 'https://stackoverflow.com/users/4383153/brad',
+            profile_image: 'https://graph.facebook.com/796150084/picture?type=large',
+            reputation: 31,
+            user_id: 4383153,
+            user_type: 'registered',
+          },
+          question_id: 61848128,
+          score: 0,
+          tags: ['javascript', 'jquery', 'ajax'],
+          title: 'Onclick using Javascript',
+          view_count: 43,
+        },
+        {
+          accepted_answer_id: 61848194,
+          answer_count: 2,
+          content_license: 'CC BY-SA 4.0',
+          creation_date: 1589699010,
+          is_answered: true,
+          last_activity_date: 1589709794,
+          last_edit_date: 1589702646,
+          link: 'https://stackoverflow.com/questions/61848128/onclick-using-javascript',
+          owner: {
+            accept_rate: 100,
+            display_name: 'Brad',
+            link: 'https://stackoverflow.com/users/4383153/brad',
+            profile_image: 'https://graph.facebook.com/796150084/picture?type=large',
+            reputation: 31,
+            user_id: 4383153,
+            user_type: 'registered',
+          },
+          question_id: 61848128,
+          score: 0,
+          tags: ['javascript', 'jquery', 'ajax'],
+          title: 'Onclick using Javascript',
+          view_count: 43,
+        }
+      ]
+    }).pipe(
+      map(({ items }: HttpResponseInterface<QuestionInterface>) => items),
+    );
+
+    // return this.http.get<HttpResponseInterface<QuestionInterface>>(`${this.api}/questions`, { params })
+    //   .pipe(
+    //     map(({ items }: HttpResponseInterface<QuestionInterface>) => items),
+    //   );
   }
 }

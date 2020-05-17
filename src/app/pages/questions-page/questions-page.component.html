@@ -1,7 +1,16 @@
-<app-quick-panel *ngIf="panelOpened$ | async"></app-quick-panel>
 <app-questions
   [questions]="questions$ | async"
   (openPanelByUser)="openPanelByUser($event)"
   (openPanelByTag)="openPanelByTag($event)"
   (navigateTo)="navigateToAnswers($event)">
 </app-questions>
+
+<ng-container *ngIf="quickPanelParams$ | async as quickPanelParams">
+  <app-quick-panel
+    [questions]="panelQuestions$ | async"
+    [info]="quickPanelParams?.info"
+    (openPanelByUser)="openPanelByUser($event)"
+    (openPanelByTag)="openPanelByTag($event)"
+    (navigateTo)="navigateToAnswers($event)">
+  </app-quick-panel>
+</ng-container>
